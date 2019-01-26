@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+    <RadioGroup
+            android:id="@+id/radioGroup"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/main_radio_height">
+
+        <RadioButton
+                android:id="@+id/historyBtn"
+                style="@style/mainRadioButtonStyle"
+                android:text="@string/radio_btn_history"
+                android:drawableTop="@drawable/main_radio_btn_today_selector"
+                />
+
+        <RadioButton
+                android:id="@+id/todayBtn"
+                style="@style/mainRadioButtonStyle"
+                android:checked="true"
+                android:text="@string/radio_btn_today"
+                android:drawableTop="@drawable/main_radio_btn_today_selector"
+
+                />
+
+        <RadioButton
+                android:id="@+id/mineBtn"
+                style="@style/mainRadioButtonStyle"
+                android:text="@string/radio_btn_mine"
+                android:drawableTop="@drawable/main_radio_btn_today_selector"
+                />
+    </RadioGroup>
+
+    <FrameLayout
+            android:id="@+id/mainContainer"
+            android:layout_above="@id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/fab_margin_left"
+            android:layout_marginRight="@dimen/fab_margin_left"
+            android:layout_marginBottom="@dimen/fab_margin_bottom"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            app:srcCompat="@android:drawable/ic_dialog_email"/>
+
+</RelativeLayout>
