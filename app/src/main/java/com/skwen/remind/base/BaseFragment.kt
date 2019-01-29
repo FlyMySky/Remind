@@ -1,13 +1,12 @@
 package com.skwen.remind.base
 
-import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.skwen.remind.MainActivity
 
 /**
  * 作者：vicent
@@ -18,12 +17,12 @@ public abstract class BaseFragment : Fragment() {
     private var isVisibleToUser: Boolean = false
     private var isViewCreated: Boolean = false
 
-    lateinit var mActivity: Activity
+    lateinit var mActivity: MainActivity
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mActivity = this!!.activity!!
+        mActivity = (this!!.activity as MainActivity?)!!
     }
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {

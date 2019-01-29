@@ -9,7 +9,7 @@
     <RelativeLayout
             android:id="@+id/mRelativeTool"
             android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_height="50dp"
             android:background="@color/colorPrimary">
 
         <ImageView
@@ -136,6 +136,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#d4d4d4"/>
+        <ViewStub
+                android:id="@+id/emptyLayout"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
     </com.haibin.calendarview.CalendarLayout>
 
 </LinearLayout>

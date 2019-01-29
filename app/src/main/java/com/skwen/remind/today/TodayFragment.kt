@@ -3,8 +3,13 @@ package com.skwen.remind.today
 import android.view.View
 import com.haibin.calendarview.Calendar
 import com.haibin.calendarview.CalendarView
+import com.jaeger.library.StatusBarUtil
 import com.skwen.remind.R
 import com.skwen.remind.base.BaseFragment
+import com.skwen.remind.greendao.DaoManager
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_today.*
 
 /**
@@ -22,11 +27,20 @@ class TodayFragment : BaseFragment() {
 
     override fun initViews() {
 
+        StatusBarUtil.setTransparent(activity)
         mLeftImage.setOnClickListener {
+
+            if (mCalendarView.isYearSelectLayoutVisible) {
+                mCalendarView.closeYearSelectLayout()
+                mActivity.switchGroup(true)
+                return@setOnClickListener
+            }
+
             if (mCalendarLayout.isExpand) {
                 mCalendarLayout.shrink()
                 return@setOnClickListener
             }
+
             mActivity.finish()
         }
 
@@ -39,6 +53,7 @@ class TodayFragment : BaseFragment() {
             mTextLunar.visibility = View.GONE
             mTextYear.visibility = View.GONE
             mTextMonthDay.text = mYear.toString()
+            mActivity.switchGroup(false)
         }
 
         flCurrent.setOnClickListener {
@@ -64,6 +79,7 @@ class TodayFragment : BaseFragment() {
             override fun onCalendarSelect(calendar: Calendar?, isClick: Boolean) {
                 if (isClick) {
                     setTitle(calendar?.day.toString(), calendar?.month.toString(), mCalendarView.curYear.toString())
+                    mActivity.switchGroup(true)
                 }
             }
 
@@ -78,6 +94,14 @@ class TodayFragment : BaseFragment() {
     }
 
     override fun loadData() {
+
+        Observable
+            .just(mCalendarView.curYear.toString() + "," + mCalendarView.curMonth.toString() + "," + mCalendarView.curDay.toString())
+            .observeOn(Schedulers.newThread())
+            .map { t -> DaoManager.getInstance().all }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { t -> var size = t?.size }
+
 
     }
 

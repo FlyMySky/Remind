@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:fitsSystemWindows="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+            <ImageView
+                    android:id="@+id/addLeftBtn"
+                    android:src="@drawable/ic_toolbar_left"
+                    android:layout_marginLeft="@dimen/fab_margin_left"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:id="@+id/addTitle"
+                    android:gravity="center"
+                    android:layout_centerInParent="true"
+                    android:text="@string/add_remind"
+                    android:textStyle="bold"
+                    android:textColor="@color/normal_text_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            <ImageView
+                    android:id="@+id/addConform"
+                    android:src="@drawable/ic_radio_today_selected"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/fab_margin_left"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp">
+
+                <TextView
+                        android:text="@string/add_remind_mouth_day"
+                        android:layout_weight="1"
+                        android:gravity="right|center"
+                        android:textColor="@color/normal_text_color"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
+
+                <TextView
+                        android:id="@+id/mouthAndDay"
+                        android:text="1月2日"
+                        android:paddingLeft="@dimen/fab_margin_left"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp">
+
+                <TextView
+                        android:text="@string/add_remind_time"
+                        android:layout_weight="1"
+                        android:gravity="right|center"
+                        android:textColor="@color/normal_text_color"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
+
+                <TextView
+                        android:id="@+id/remindTime"
+                        android:text="8:00"
+                        android:paddingLeft="@dimen/fab_margin_left"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp">
+
+                <TextView
+                        android:text="@string/add_remind_content"
+                        android:layout_weight="1"
+                        android:gravity="right|center"
+                        android:textColor="@color/normal_text_color"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
+
+                <TextView
+                        android:id="@+id/remindCycleTime"
+                        android:text="无重复"
+                        android:paddingLeft="@dimen/fab_margin_left"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp">
+
+                <TextView
+                        android:text="@string/add_remind_level"
+                        android:textColor="@color/normal_text_color"
+                        android:layout_weight="1"
+                        android:gravity="right|center"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:paddingLeft="@dimen/fab_margin_left"
+                        android:layout_height="wrap_content">
+
+                    <CheckBox
+                            android:id="@+id/levelImportant"
+                            android:button="@drawable/ic_add_level_important"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    <CheckBox
+                            android:id="@+id/levelMiddle"
+                            android:button="@drawable/ic_add_level_middle"
+                            android:layout_marginLeft="@dimen/fab_margin_left"
+                            android:layout_marginRight="@dimen/fab_margin_left"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    <CheckBox
+                            android:id="@+id/levelNormal"
+                            android:button="@drawable/ic_add_level_normal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <ImageView
+                        android:src="@drawable/ic_add_level_unselected"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <EditText
+                        android:id="@+id/remindContent"
+                        android:layout_marginLeft="@dimen/fab_margin_left"
+                        android:layout_marginRight="@dimen/fab_margin_left"
+                        android:textColor="@color/normal_text_color"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

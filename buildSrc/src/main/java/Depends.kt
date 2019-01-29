@@ -36,6 +36,10 @@ object Versions {
     const val aviLoadingVersion = "2.1.3"
     const val utilCodeVersion = "1.22.3"
     const val calendarViewVersion = "3.5.1"
+    const val greenDaoVersion = "3.2.0"
+    const val greenDaoPluginVersion = "3.2.1"
+
+
 }
 
 object Depends {
@@ -92,4 +96,8 @@ object Depends {
     const val utilcode = "com.blankj:utilcode:${Versions.utilCodeVersion}"
     //日历
     const val calendarview = "com.haibin:calendarview:${Versions.calendarViewVersion}"
+
+    //greenDao
+    const val greenDao = "org.greenrobot:greendao:${Versions.greenDaoVersion}"
+    const val greenPluginDao = "org.greenrobot:greendao-gradle-plugin:${Versions.greenDaoPluginVersion}"
 }

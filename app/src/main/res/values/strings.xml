@@ -5,4 +5,11 @@
     <string name="radio_btn_history">History</string>
     <string name="radio_btn_today">Today</string>
     <string name="radio_btn_mine">Mine</string>
+
+    <!-- add activity-->
+    <string name="add_remind">Add Remind</string>
+    <string name="add_remind_mouth_day">Remind MM DD:</string>
+    <string name="add_remind_time">Remind Time:</string>
+    <string name="add_remind_content">Remind Cycle:</string>
+    <string name="add_remind_level">Remind Level:</string>
 </resources>
