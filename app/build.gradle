@@ -41,6 +41,7 @@ dependencies {
 
     implementation Depends.kotlinStdlibJdk7
     implementation Depends.appcompatV7
+    implementation Depends.appcompatV4
     implementation Depends.constraintLayout
     implementation Depends.design
     implementation Depends.calendarview
@@ -49,4 +50,5 @@ dependencies {
     implementation Depends.greenDao
     implementation Depends.rxjava2
     implementation Depends.rxandroid
+    implementation Depends.timePicker
 }

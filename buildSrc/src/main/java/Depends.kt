@@ -38,6 +38,7 @@ object Versions {
     const val calendarViewVersion = "3.5.1"
     const val greenDaoVersion = "3.2.0"
     const val greenDaoPluginVersion = "3.2.1"
+    const val timePickerVersion = "1.0.1"
 
 
 }
@@ -100,4 +101,6 @@ object Depends {
     //greenDao
     const val greenDao = "org.greenrobot:greendao:${Versions.greenDaoVersion}"
     const val greenPluginDao = "org.greenrobot:greendao-gradle-plugin:${Versions.greenDaoPluginVersion}"
+
+    const val timePicker = "com.jzxiang.pickerview:TimePickerDialog:${Versions.timePickerVersion}"
 }

@@ -21,7 +21,7 @@ public class SimpleMonthView extends MonthView {
     public SimpleMonthView(Context context) {
         super(context);
         //兼容硬件加速无效的代码
-        setLayerType(View.LAYER_TYPE_SOFTWARE,mSelectedPaint);
+        setLayerType(View.LAYER_TYPE_SOFTWARE, mSelectedPaint);
         //4.0以上硬件加速会导致无效
 //        mSelectedPaint.setMaskFilter(new BlurMaskFilter(25, BlurMaskFilter.Blur.SOLID));
     }
@@ -73,9 +73,12 @@ public class SimpleMonthView extends MonthView {
                             calendar.isCurrentMonth() ? mSchemeTextPaint : mOtherMonthTextPaint);
 
         } else {
-            canvas.drawText(String.valueOf(calendar.getDay()), cx, baselineY,
-                    calendar.isCurrentDay() ? mCurDayTextPaint :
-                            calendar.isCurrentMonth() ? mCurMonthTextPaint : mOtherMonthTextPaint);
+            if (calendar.isWeekend()) {
+                canvas.drawText(calendar.isCurrentDay() ? "今" : String.valueOf(calendar.getDay()), cx, baselineY, calendar.isCurrentMonth() ? mCurDayTextPaint : mOtherMonthTextPaint);
+            } else
+                canvas.drawText(String.valueOf(calendar.getDay()), cx, baselineY,
+                        calendar.isCurrentDay() ? mCurDayTextPaint :
+                                calendar.isCurrentMonth() ? mCurMonthTextPaint : mOtherMonthTextPaint);
         }
     }
 }

@@ -33,11 +33,14 @@ public class RecordDao extends AbstractDao<Record, Long> {
         public final static Property Content = new Property(3, String.class, "content", false, "CONTENT");
         public final static Property YearTime = new Property(4, int.class, "yearTime", false, "YEAR_TIME");
         public final static Property MouthTime = new Property(5, int.class, "mouthTime", false, "MOUTH_TIME");
-        public final static Property RemindTime = new Property(6, String.class, "remindTime", false, "REMIND_TIME");
-        public final static Property SaveTime = new Property(7, String.class, "saveTime", false, "SAVE_TIME");
-        public final static Property Cycles = new Property(8, String.class, "cycles", false, "CYCLES");
-        public final static Property IsOver = new Property(9, boolean.class, "isOver", false, "IS_OVER");
-        public final static Property Level = new Property(10, int.class, "level", false, "LEVEL");
+        public final static Property DayTime = new Property(6, int.class, "dayTime", false, "DAY_TIME");
+        public final static Property RemindDate = new Property(7, Long.class, "remindDate", false, "REMIND_DATE");
+        public final static Property RemindTime = new Property(8, String.class, "remindTime", false, "REMIND_TIME");
+        public final static Property SaveTime = new Property(9, Long.class, "saveTime", false, "SAVE_TIME");
+        public final static Property Cycles = new Property(10, String.class, "cycles", false, "CYCLES");
+        public final static Property IsOver = new Property(11, boolean.class, "isOver", false, "IS_OVER");
+        public final static Property IsOpen = new Property(12, boolean.class, "isOpen", false, "IS_OPEN");
+        public final static Property Level = new Property(13, int.class, "level", false, "LEVEL");
     }
 
     private final CycleConverter cyclesConverter = new CycleConverter();
@@ -60,11 +63,14 @@ public class RecordDao extends AbstractDao<Record, Long> {
                 "\"CONTENT\" TEXT," + // 3: content
                 "\"YEAR_TIME\" INTEGER NOT NULL ," + // 4: yearTime
                 "\"MOUTH_TIME\" INTEGER NOT NULL ," + // 5: mouthTime
-                "\"REMIND_TIME\" TEXT," + // 6: remindTime
-                "\"SAVE_TIME\" TEXT," + // 7: saveTime
-                "\"CYCLES\" TEXT," + // 8: cycles
-                "\"IS_OVER\" INTEGER NOT NULL ," + // 9: isOver
-                "\"LEVEL\" INTEGER NOT NULL );"); // 10: level
+                "\"DAY_TIME\" INTEGER NOT NULL ," + // 6: dayTime
+                "\"REMIND_DATE\" INTEGER," + // 7: remindDate
+                "\"REMIND_TIME\" TEXT," + // 8: remindTime
+                "\"SAVE_TIME\" INTEGER," + // 9: saveTime
+                "\"CYCLES\" TEXT," + // 10: cycles
+                "\"IS_OVER\" INTEGER NOT NULL ," + // 11: isOver
+                "\"IS_OPEN\" INTEGER NOT NULL ," + // 12: isOpen
+                "\"LEVEL\" INTEGER NOT NULL );"); // 13: level
     }
 
     /** Drops the underlying database table. */
@@ -94,23 +100,30 @@ public class RecordDao extends AbstractDao<Record, Long> {
         }
         stmt.bindLong(5, entity.getYearTime());
         stmt.bindLong(6, entity.getMouthTime());
+        stmt.bindLong(7, entity.getDayTime());
+ 
+        Long remindDate = entity.getRemindDate();
+        if (remindDate != null) {
+            stmt.bindLong(8, remindDate);
+        }
  
         String remindTime = entity.getRemindTime();
         if (remindTime != null) {
-            stmt.bindString(7, remindTime);
+            stmt.bindString(9, remindTime);
         }
  
-        String saveTime = entity.getSaveTime();
+        Long saveTime = entity.getSaveTime();
         if (saveTime != null) {
-            stmt.bindString(8, saveTime);
+            stmt.bindLong(10, saveTime);
         }
  
         List cycles = entity.getCycles();
         if (cycles != null) {
-            stmt.bindString(9, cyclesConverter.convertToDatabaseValue(cycles));
+            stmt.bindString(11, cyclesConverter.convertToDatabaseValue(cycles));
         }
-        stmt.bindLong(10, entity.getIsOver() ? 1L: 0L);
-        stmt.bindLong(11, entity.getLevel());
+        stmt.bindLong(12, entity.getIsOver() ? 1L: 0L);
+        stmt.bindLong(13, entity.getIsOpen() ? 1L: 0L);
+        stmt.bindLong(14, entity.getLevel());
     }
 
     @Override
@@ -134,23 +147,30 @@ public class RecordDao extends AbstractDao<Record, Long> {
         }
         stmt.bindLong(5, entity.getYearTime());
         stmt.bindLong(6, entity.getMouthTime());
+        stmt.bindLong(7, entity.getDayTime());
+ 
+        Long remindDate = entity.getRemindDate();
+        if (remindDate != null) {
+            stmt.bindLong(8, remindDate);
+        }
  
         String remindTime = entity.getRemindTime();
         if (remindTime != null) {
-            stmt.bindString(7, remindTime);
+            stmt.bindString(9, remindTime);
         }
  
-        String saveTime = entity.getSaveTime();
+        Long saveTime = entity.getSaveTime();
         if (saveTime != null) {
-            stmt.bindString(8, saveTime);
+            stmt.bindLong(10, saveTime);
         }
  
         List cycles = entity.getCycles();
         if (cycles != null) {
-            stmt.bindString(9, cyclesConverter.convertToDatabaseValue(cycles));
+            stmt.bindString(11, cyclesConverter.convertToDatabaseValue(cycles));
         }
-        stmt.bindLong(10, entity.getIsOver() ? 1L: 0L);
-        stmt.bindLong(11, entity.getLevel());
+        stmt.bindLong(12, entity.getIsOver() ? 1L: 0L);
+        stmt.bindLong(13, entity.getIsOpen() ? 1L: 0L);
+        stmt.bindLong(14, entity.getLevel());
     }
 
     @Override
@@ -167,11 +187,14 @@ public class RecordDao extends AbstractDao<Record, Long> {
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // content
             cursor.getInt(offset + 4), // yearTime
             cursor.getInt(offset + 5), // mouthTime
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // remindTime
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // saveTime
-            cursor.isNull(offset + 8) ? null : cyclesConverter.convertToEntityProperty(cursor.getString(offset + 8)), // cycles
-            cursor.getShort(offset + 9) != 0, // isOver
-            cursor.getInt(offset + 10) // level
+            cursor.getInt(offset + 6), // dayTime
+            cursor.isNull(offset + 7) ? null : cursor.getLong(offset + 7), // remindDate
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // remindTime
+            cursor.isNull(offset + 9) ? null : cursor.getLong(offset + 9), // saveTime
+            cursor.isNull(offset + 10) ? null : cyclesConverter.convertToEntityProperty(cursor.getString(offset + 10)), // cycles
+            cursor.getShort(offset + 11) != 0, // isOver
+            cursor.getShort(offset + 12) != 0, // isOpen
+            cursor.getInt(offset + 13) // level
         );
         return entity;
     }
@@ -184,11 +207,14 @@ public class RecordDao extends AbstractDao<Record, Long> {
         entity.setContent(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setYearTime(cursor.getInt(offset + 4));
         entity.setMouthTime(cursor.getInt(offset + 5));
-        entity.setRemindTime(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setSaveTime(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
-        entity.setCycles(cursor.isNull(offset + 8) ? null : cyclesConverter.convertToEntityProperty(cursor.getString(offset + 8)));
-        entity.setIsOver(cursor.getShort(offset + 9) != 0);
-        entity.setLevel(cursor.getInt(offset + 10));
+        entity.setDayTime(cursor.getInt(offset + 6));
+        entity.setRemindDate(cursor.isNull(offset + 7) ? null : cursor.getLong(offset + 7));
+        entity.setRemindTime(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setSaveTime(cursor.isNull(offset + 9) ? null : cursor.getLong(offset + 9));
+        entity.setCycles(cursor.isNull(offset + 10) ? null : cyclesConverter.convertToEntityProperty(cursor.getString(offset + 10)));
+        entity.setIsOver(cursor.getShort(offset + 11) != 0);
+        entity.setIsOpen(cursor.getShort(offset + 12) != 0);
+        entity.setLevel(cursor.getInt(offset + 13));
      }
     
     @Override

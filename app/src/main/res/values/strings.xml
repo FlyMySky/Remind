@@ -12,4 +12,13 @@
     <string name="add_remind_time">Remind Time:</string>
     <string name="add_remind_content">Remind Cycle:</string>
     <string name="add_remind_level">Remind Level:</string>
+    <string name="add_week_monday">Monday</string>
+    <string name="add_week_tuesday">Tuesday</string>
+    <string name="add_week_wednesday">Wednesday</string>
+    <string name="add_week_thursday">Thursday</string>
+    <string name="add_week_friday">Friday</string>
+    <string name="add_week_staurday">Saturday</string>
+    <string name="add_week_sunday">Sunday</string>
+    <string name="add_week_not_repeat">Not Repeat</string>
+
 </resources>

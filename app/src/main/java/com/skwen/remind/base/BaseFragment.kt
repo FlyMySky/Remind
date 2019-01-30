@@ -41,6 +41,7 @@ public abstract class BaseFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        isViewCreated = true
         initViews()
         if (isVisibleToUser && isViewCreated) {
             loadData()

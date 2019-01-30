@@ -171,6 +171,8 @@
 
             <LinearLayout
                     android:gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/fab_margin_left"
+                    android:layout_marginRight="@dimen/fab_margin_left"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -181,8 +183,8 @@
 
                 <EditText
                         android:id="@+id/remindContent"
-                        android:layout_marginLeft="@dimen/fab_margin_left"
-                        android:layout_marginRight="@dimen/fab_margin_left"
+                        android:paddingLeft="@dimen/fab_margin_left"
+                        android:paddingRight="@dimen/fab_margin_left"
                         android:textColor="@color/normal_text_color"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>

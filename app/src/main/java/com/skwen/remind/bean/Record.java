@@ -44,6 +44,15 @@ public class Record {
     private int mouthTime;
 
     /**
+     * 日
+     */
+    private int dayTime;
+    /**
+     * 提醒日期 2018 12 30
+     */
+    private Long remindDate;
+
+    /**
      * 提醒时间 00:00
      */
     private String remindTime;
@@ -51,7 +60,7 @@ public class Record {
     /**
      * 保存时间
      */
-    private String saveTime;
+    private Long saveTime;
 
     @Convert(columnType = String.class, converter = CycleConverter.class)
     private List<String> cycles;
@@ -60,26 +69,34 @@ public class Record {
      * 提醒是否完成
      */
     private boolean isOver;
+    /**
+     * 提醒开关
+     */
+    private boolean isOpen;
 
     /**
      * 0 normal 1 middle 2 important
      */
     private int level;
 
-    @Generated(hash = 137438767)
+    @Generated(hash = 504752837)
     public Record(Long id, int type, String action, String content, int yearTime,
-            int mouthTime, String remindTime, String saveTime, List<String> cycles,
-            boolean isOver, int level) {
+            int mouthTime, int dayTime, Long remindDate, String remindTime,
+            Long saveTime, List<String> cycles, boolean isOver, boolean isOpen,
+            int level) {
         this.id = id;
         this.type = type;
         this.action = action;
         this.content = content;
         this.yearTime = yearTime;
         this.mouthTime = mouthTime;
+        this.dayTime = dayTime;
+        this.remindDate = remindDate;
         this.remindTime = remindTime;
         this.saveTime = saveTime;
         this.cycles = cycles;
         this.isOver = isOver;
+        this.isOpen = isOpen;
         this.level = level;
     }
 
@@ -143,11 +160,11 @@ public class Record {
         this.remindTime = remindTime;
     }
 
-    public String getSaveTime() {
+    public Long getSaveTime() {
         return this.saveTime;
     }
 
-    public void setSaveTime(String saveTime) {
+    public void setSaveTime(Long saveTime) {
         this.saveTime = saveTime;
     }
 
@@ -173,6 +190,30 @@ public class Record {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public int getDayTime() {
+        return this.dayTime;
+    }
+
+    public void setDayTime(int dayTime) {
+        this.dayTime = dayTime;
+    }
+
+    public Long getRemindDate() {
+        return this.remindDate;
+    }
+
+    public void setRemindDate(Long remindDate) {
+        this.remindDate = remindDate;
+    }
+
+    public boolean getIsOpen() {
+        return this.isOpen;
+    }
+
+    public void setIsOpen(boolean isOpen) {
+        this.isOpen = isOpen;
     }
 
 

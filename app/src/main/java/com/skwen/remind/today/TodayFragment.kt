@@ -1,12 +1,20 @@
 package com.skwen.remind.today
 
+import android.database.ContentObserver
+import android.os.Handler
+import android.os.Looper
 import android.view.View
+import com.blankj.utilcode.util.ToastUtils
 import com.haibin.calendarview.Calendar
 import com.haibin.calendarview.CalendarView
 import com.jaeger.library.StatusBarUtil
 import com.skwen.remind.R
+import com.skwen.remind.adapter.TodayAdapter
 import com.skwen.remind.base.BaseFragment
+import com.skwen.remind.bean.Record
 import com.skwen.remind.greendao.DaoManager
+import com.skwen.remind.utils.MyContentProvider
+import com.skwen.remind.utils.StatusBarManager
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -20,14 +28,37 @@ class TodayFragment : BaseFragment() {
 
     private var mYear: Int = 0
 
+    private lateinit var mAdapter: TodayAdapter
+
+    private var mList: MutableList<Record> = mutableListOf()
+
+    private var mHandler = Handler(Looper.getMainLooper())
+
+    private val mContentObserver = object : ContentObserver(mHandler) {
+        override fun onChange(selfChange: Boolean) {
+            super.onChange(selfChange)
+            loadData()
+        }
+    }
+
 
     override fun getLayoutRes(): Int {
         return R.layout.fragment_today
     }
 
     override fun initViews() {
-
         StatusBarUtil.setTransparent(activity)
+        StatusBarUtil.setLightMode(activity)
+        // 设置状态栏字体黑色
+//        activity!!.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+
+        activity?.contentResolver?.registerContentObserver(MyContentProvider.URI, true, mContentObserver)
+
+
+        mAdapter = TodayAdapter(mList)
+
+        recyclerView.adapter = mAdapter
+
         mLeftImage.setOnClickListener {
 
             if (mCalendarView.isYearSelectLayoutVisible) {
@@ -84,7 +115,7 @@ class TodayFragment : BaseFragment() {
             }
 
             override fun onCalendarOutOfRange(calendar: Calendar?) {
-
+                ToastUtils.showShort("超出设定范围。")
             }
 
         })
@@ -100,7 +131,11 @@ class TodayFragment : BaseFragment() {
             .observeOn(Schedulers.newThread())
             .map { t -> DaoManager.getInstance().all }
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { t -> var size = t?.size }
+            .subscribe { t ->
+                mList.clear()
+                mList.addAll(t)
+                mAdapter.notifyDataSetChanged()
+            }
 
 
     }
@@ -114,4 +149,9 @@ class TodayFragment : BaseFragment() {
         mTextCurrentDay.text = mCalendarView.curDay.toString()
     }
 
+
+    override fun onDestroy() {
+        super.onDestroy()
+        activity?.contentResolver?.unregisterContentObserver(mContentObserver)
+    }
 }

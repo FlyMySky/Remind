@@ -2,6 +2,7 @@ package com.skwen.remind.greendao;
 
 import com.blankj.utilcode.util.Utils;
 import com.skwen.remind.bean.Record;
+import com.skwen.remind.utils.MyContentProvider;
 import org.greenrobot.greendao.database.Database;
 
 import java.util.List;
@@ -44,14 +45,20 @@ public class DaoManager {
     }
 
     public Long insertRecord(Record record) {
-        return daoSession.insert(record);
+        Long count = daoSession.insert(record);
+        if (count > 0) {
+            Utils.getApp().getContentResolver().notifyChange(MyContentProvider.URI, null);
+        }
+        return count;
     }
 
     public void updateRecord(Record record) {
         daoSession.update(record);
+        Utils.getApp().getContentResolver().notifyChange(MyContentProvider.URI, null);
     }
 
     public void deleteRecord(Record record) {
         daoSession.delete(record);
+        Utils.getApp().getContentResolver().notifyChange(MyContentProvider.URI, null);
     }
 }

@@ -25,6 +25,10 @@
                 android:name=".add.AddRemindActivity"
                 android:theme="@style/AppTheme.NoActionBar"
                 />
+
+        <provider
+                android:authorities="com.skwen.remind"
+                android:name=".utils.MyContentProvider"/>
     </application>
 
 </manifest>

@@ -1,9 +1,7 @@
 package com.skwen.remind.custom;
 
 import android.content.Context;
-import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.View;
 import com.haibin.calendarview.Calendar;
@@ -21,7 +19,7 @@ public class SimpleWeekView extends WeekView {
 
     public SimpleWeekView(Context context) {
         super(context);
-        setLayerType(View.LAYER_TYPE_SOFTWARE,mSelectedPaint);
+        setLayerType(View.LAYER_TYPE_SOFTWARE, mSelectedPaint);
         //4.0以上硬件加速会导致无效
 //        mSelectedPaint.setMaskFilter(new BlurMaskFilter(25, BlurMaskFilter.Blur.SOLID));
 
@@ -68,9 +66,13 @@ public class SimpleWeekView extends WeekView {
                             calendar.isCurrentMonth() ? mSchemeTextPaint : mSchemeTextPaint);
 
         } else {
-            canvas.drawText(String.valueOf(calendar.getDay()), cx, baselineY,
-                    calendar.isCurrentDay() ? mCurDayTextPaint :
-                            calendar.isCurrentMonth() ? mCurMonthTextPaint : mCurMonthTextPaint);
+            if (calendar.isWeekend()) {
+                canvas.drawText(calendar.isCurrentDay() ? "今" : String.valueOf(calendar.getDay()), cx, baselineY, mCurDayTextPaint);
+            } else {
+                canvas.drawText(calendar.isCurrentDay() ? "今" : String.valueOf(calendar.getDay()), cx, baselineY,
+                        calendar.isCurrentDay() ? mCurDayTextPaint :
+                                calendar.isCurrentMonth() ? mCurMonthTextPaint : mCurMonthTextPaint);
+            }
         }
     }
 }
