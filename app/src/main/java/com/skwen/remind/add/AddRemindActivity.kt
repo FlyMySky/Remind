@@ -34,14 +34,22 @@ class AddRemindActivity : BaseActivity() {
         addConform.setOnClickListener {
             val record = Record()
             val millSecends = mouthAndDay.tag as Long?
+            val list = remindCycleTime.tag as MutableList<String>?
             record.saveTime = TimeUtils.getNowMills()
             record.content = remindContent.text.toString()
-            record.cycles = remindCycleTime.tag as MutableList<String>?
+            record.cycles = list
             record.remindDate = millSecends
             record.remindTime = remindTime.text as String?
             record.yearTime = TimeUtils.millis2String(millSecends!!, SimpleDateFormat("yyyy")).toInt()
             record.mouthTime = TimeUtils.millis2String(millSecends, SimpleDateFormat("MM")).toInt()
             record.dayTime = TimeUtils.millis2String(millSecends, SimpleDateFormat("dd")).toInt()
+            record.isOpen = true
+            record.isOver = false
+            if (list!!.size < 7) {
+                record.isEveryDay = false
+            } else if (list.size == 7) {
+                record.isEveryDay = true
+            }
             //0 normal 1 middle 2 important
             when {
                 levelNormal.isChecked -> record.level = 0

@@ -44,6 +44,20 @@ public class DaoManager {
         return daoSession.queryRaw(Record.class, where, args);
     }
 
+    public List<Record> getArgsRecord(int yearTime, int mouthTime, int dayTime) {
+
+        return daoSession.queryBuilder(Record.class)
+                .where(RecordDao.Properties.YearTime.eq(yearTime), RecordDao.Properties.MouthTime.eq(mouthTime), RecordDao.Properties.DayTime.eq(dayTime))
+                .list();
+    }
+
+    public List<Record> getArgsRecord(boolean isOpen, boolean isOver) {
+
+        return daoSession.queryBuilder(Record.class)
+                .where(RecordDao.Properties.IsOpen.eq(isOpen), RecordDao.Properties.IsOver.eq(isOver))
+                .list();
+    }
+
     public Long insertRecord(Record record) {
         Long count = daoSession.insert(record);
         if (count > 0) {

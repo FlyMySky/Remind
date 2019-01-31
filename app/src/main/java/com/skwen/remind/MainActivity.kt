@@ -1,18 +1,22 @@
 package com.skwen.remind
 
 import android.content.Intent
-import android.os.Bundle
+import android.os.Build
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
-import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
+import android.widget.Toast
 import com.skwen.remind.adapter.MainPagerAdapter
 import com.skwen.remind.base.BaseActivity
 import com.skwen.remind.history.HistoryFragment
 import com.skwen.remind.mine.MineFragment
+import com.skwen.remind.service.RemindService
 import com.skwen.remind.today.TodayFragment
 import com.skwen.remind.utils.IntentProvider
+import com.skwen.remind.utils.PUtils
+import com.skwen.remind.utils.PUtils.REQUEST_IGNORE_BATTERY_CODE
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -27,6 +31,17 @@ class MainActivity : BaseActivity() {
     }
 
     override fun loadData() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!PUtils.getInstance().isIgnoringBatteryOptimizations(this)) {
+                PUtils.getInstance().gotoSettingIgnoringBatteryOptimizations(this)
+                return
+            }
+        }
+
+        val intent = Intent(this, RemindService::class.java)
+        startService(intent)
+
         radioGroup.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
                 R.id.historyBtn -> {
@@ -93,6 +108,17 @@ class MainActivity : BaseActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == IntentProvider.code) {
 
+        }
+
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_IGNORE_BATTERY_CODE) {
+                Log.d("Hello World!", "开启省电模式成功")
+                loadData()
+            }
+        } else if (resultCode == RESULT_CANCELED) {
+            if (requestCode == REQUEST_IGNORE_BATTERY_CODE) {
+                Toast.makeText(this, "请用户开启忽略电池优化~", Toast.LENGTH_LONG).show();
+            }
         }
     }
 

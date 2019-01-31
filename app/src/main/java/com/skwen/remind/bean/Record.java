@@ -53,6 +53,11 @@ public class Record {
     private Long remindDate;
 
     /**
+     * 是否是每天
+     */
+    private boolean isEveryDay;
+
+    /**
      * 提醒时间 00:00
      */
     private String remindTime;
@@ -79,11 +84,11 @@ public class Record {
      */
     private int level;
 
-    @Generated(hash = 504752837)
+    @Generated(hash = 102448090)
     public Record(Long id, int type, String action, String content, int yearTime,
-            int mouthTime, int dayTime, Long remindDate, String remindTime,
-            Long saveTime, List<String> cycles, boolean isOver, boolean isOpen,
-            int level) {
+            int mouthTime, int dayTime, Long remindDate, boolean isEveryDay,
+            String remindTime, Long saveTime, List<String> cycles, boolean isOver,
+            boolean isOpen, int level) {
         this.id = id;
         this.type = type;
         this.action = action;
@@ -92,6 +97,7 @@ public class Record {
         this.mouthTime = mouthTime;
         this.dayTime = dayTime;
         this.remindDate = remindDate;
+        this.isEveryDay = isEveryDay;
         this.remindTime = remindTime;
         this.saveTime = saveTime;
         this.cycles = cycles;
@@ -214,6 +220,14 @@ public class Record {
 
     public void setIsOpen(boolean isOpen) {
         this.isOpen = isOpen;
+    }
+
+    public boolean getIsEveryDay() {
+        return this.isEveryDay;
+    }
+
+    public void setIsEveryDay(boolean isEveryDay) {
+        this.isEveryDay = isEveryDay;
     }
 
 
