@@ -3,7 +3,6 @@ package com.skwen.remind.today
 import android.database.ContentObserver
 import android.os.Handler
 import android.os.Looper
-import android.view.View
 import com.blankj.utilcode.util.ToastUtils
 import com.haibin.calendarview.Calendar
 import com.haibin.calendarview.CalendarView
@@ -14,7 +13,6 @@ import com.skwen.remind.base.BaseFragment
 import com.skwen.remind.bean.Record
 import com.skwen.remind.greendao.DaoManager
 import com.skwen.remind.utils.MyContentProvider
-import com.skwen.remind.utils.StatusBarManager
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -57,7 +55,7 @@ class TodayFragment : BaseFragment() {
 
         mAdapter = TodayAdapter(mList)
 
-        recyclerView.adapter = mAdapter
+        mRecyclerView.adapter = mAdapter
 
         mLeftImage.setOnClickListener {
 
@@ -75,17 +73,17 @@ class TodayFragment : BaseFragment() {
             mActivity.finish()
         }
 
-        mTextMonthDay.setOnClickListener {
-            if (!mCalendarLayout.isExpand) {
-                mCalendarLayout.expand()
-                return@setOnClickListener
-            }
-            mCalendarView.showYearSelectLayout(mYear)
-            mTextLunar.visibility = View.GONE
-            mTextYear.visibility = View.GONE
-            mTextMonthDay.text = mYear.toString()
-            mActivity.switchGroup(false)
-        }
+//        mTextMonthDay.setOnClickListener {
+//            if (!mCalendarLayout.isExpand) {
+//                mCalendarLayout.expand()
+//                return@setOnClickListener
+//            }
+//            mCalendarView.showYearSelectLayout(mYear)
+//            mTextLunar.visibility = View.GONE
+//            mTextYear.visibility = View.GONE
+//            mTextMonthDay.text = mYear.toString()
+//            mActivity.switchGroup(false)
+//        }
 
         flCurrent.setOnClickListener {
             mCalendarView.scrollToCurrent()
@@ -106,6 +104,8 @@ class TodayFragment : BaseFragment() {
         }
         setTitle(mCalendarView.curDay.toString(), mCalendarView.curMonth.toString(), mCalendarView.curYear.toString())
 
+        setExpandState()
+
         mCalendarView.setOnCalendarSelectListener(object : CalendarView.OnCalendarSelectListener {
             override fun onCalendarSelect(calendar: Calendar?, isClick: Boolean) {
                 if (isClick) {
@@ -119,9 +119,40 @@ class TodayFragment : BaseFragment() {
             }
 
         })
+        mCalendarView.setOnViewChangeListener {
+            setExpandState()
+        }
+//        mCalendarView.setOnYearChangeListener { year -> mTextMonthDay.text = year.toString() }
+        mCalendarView.setOnMonthChangeListener { year, month ->
+            mSelectTime.text = "$year-$month"
+        }
+        mSelectLeft.setOnClickListener {
+            mCalendarView.scrollToPre()
+        }
 
-        mCalendarView.setOnYearChangeListener { year -> mTextMonthDay.text = year.toString() }
+        mSelectRight.setOnClickListener {
+            mCalendarView.scrollToNext()
+        }
 
+        mExpandLayout.setOnClickListener {
+            if (mCalendarLayout.isExpand) {
+                mCalendarLayout.shrink()
+                mExpandCalendar.setImageResource(R.drawable.ic_today_expand_more)
+            } else {
+                mCalendarLayout.expand()
+                mExpandCalendar.setImageResource(R.drawable.ic_today_expand_less)
+            }
+        }
+    }
+
+    private fun setExpandState() {
+        Handler().postDelayed({
+            if (mCalendarLayout.isExpand) {
+                mExpandCalendar.setImageResource(R.drawable.ic_today_expand_less)
+            } else {
+                mExpandCalendar.setImageResource(R.drawable.ic_today_expand_more)
+            }
+        }, 500)
     }
 
     override fun loadData() {
@@ -136,16 +167,15 @@ class TodayFragment : BaseFragment() {
                 mList.addAll(t)
                 mAdapter.notifyDataSetChanged()
             }
-
-
     }
 
 
     private fun setTitle(day: String, month: String, year: String) {
-        mTextYear.text = year
+//        mTextYear.text = year
+        mSelectTime.text = "$year-$month"
         mYear = year.toInt()
-        mTextMonthDay.text = month + "月" + day + "日"
-        mTextLunar.text = day
+//        mTextMonthDay.text = month + "月" + day + "日"
+//        mTextLunar.text = day
         mTextCurrentDay.text = mCalendarView.curDay.toString()
     }
 

@@ -1,5 +1,6 @@
 package com.skwen.remind.utils
 
+import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -79,6 +80,7 @@ class NotificationUtils {
                         .setContentIntent(pi)
                         //设置删除通知时的响应事件
 //                        .setContentIntent(deletePendingIntent)
+                        .setDefaults(Notification.DEFAULT_ALL)
                         .build()
                     //发送通知
                     manager.notify(1, nb)
@@ -97,6 +99,7 @@ class NotificationUtils {
                         //设置通知内容
                         .setContentText(record.content)
                         .setContentIntent(pi)
+                        .setDefaults(Notification.DEFAULT_ALL)
                     //设置删除通知时的响应事件
 //                        .setContentIntent(deletePendingIntent)
                     manager.notify(1, builder.build())

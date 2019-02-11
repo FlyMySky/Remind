@@ -38,7 +38,7 @@ class TodayAdapter(private var list: MutableList<Record>) : RecyclerView.Adapter
             item.level == 1 -> holder.itemLevel.setImageResource(R.drawable.ic_add_level_middle_unselected)
             item.level == 2 -> holder.itemLevel.setImageResource(R.drawable.ic_add_level_important_unselected)
         }
-        holder.itemRemindTime.text = TimeUtils.millis2String(item.remindDate, SimpleDateFormat("MM月dd日 HH:mm"))
+        holder.itemRemindTime.text = TimeUtils.millis2String(item.remindDate, SimpleDateFormat("HH:mm"))
         holder.itemRemindContent.text = item.content
     }
 }
