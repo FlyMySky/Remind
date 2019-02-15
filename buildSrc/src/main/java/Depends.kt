@@ -39,6 +39,7 @@ object Versions {
     const val greenDaoVersion = "3.2.0"
     const val greenDaoPluginVersion = "3.2.1"
     const val timePickerVersion = "1.0.1"
+    const val swipeRecyclerViewVersion = "1.3.0"
 
 
 }
@@ -103,4 +104,6 @@ object Depends {
     const val greenPluginDao = "org.greenrobot:greendao-gradle-plugin:${Versions.greenDaoPluginVersion}"
 
     const val timePicker = "com.jzxiang.pickerview:TimePickerDialog:${Versions.timePickerVersion}"
+    //提供了Item侧滑菜单、Item滑动删除、Item长按拖拽、添加HeaderView/FooterView、加载更多、Item点击监听等基本功能。
+    const val swipeRecyclerView = "com.yanzhenjie.recyclerview:support:${Versions.swipeRecyclerViewVersion}"
 }

@@ -51,4 +51,5 @@ dependencies {
     implementation Depends.rxjava2
     implementation Depends.rxandroid
     implementation Depends.timePicker
+    implementation Depends.swipeRecyclerView
 }

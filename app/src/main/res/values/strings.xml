@@ -20,5 +20,6 @@
     <string name="add_week_staurday">Saturday</string>
     <string name="add_week_sunday">Sunday</string>
     <string name="add_week_not_repeat">Not Repeat</string>
+    <string name="history_title">History</string>
 
 </resources>

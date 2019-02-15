@@ -39,5 +39,6 @@
     <string name="add_week_staurday">周六</string>
     <string name="add_week_sunday">周日</string>
     <string name="add_week_not_repeat">不重复</string>
+    <string name="history_title">历史记录</string>
 
 </resources>
