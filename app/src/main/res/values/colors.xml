@@ -6,4 +6,6 @@
     <color name="circle_color">#80C269</color>
     <color name="background_color">#FFFFFF</color>
     <color name="normal_text_color">#000000</color>
+    <color name="today_back_color">#F5F5F5</color>
+    <color name="today_list_item_line_color">#DCDCDC</color>
 </resources>

@@ -73,6 +73,9 @@ public class SimpleMonthView extends MonthView {
                             calendar.isCurrentMonth() ? mSchemeTextPaint : mOtherMonthTextPaint);
 
         } else {
+            mCurDayTextPaint.setFakeBoldText(false);
+            mCurMonthTextPaint.setFakeBoldText(false);
+            mOtherMonthTextPaint.setFakeBoldText(false);
             if (calendar.isWeekend()) {
                 canvas.drawText(calendar.isCurrentDay() ? "今" : String.valueOf(calendar.getDay()), cx, baselineY, calendar.isCurrentMonth() ? mCurDayTextPaint : mOtherMonthTextPaint);
             } else

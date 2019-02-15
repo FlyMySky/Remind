@@ -25,6 +25,8 @@ import kotlinx.android.synthetic.main.fragment_today.*
 class TodayFragment : BaseFragment() {
 
     private var mYear: Int = 0
+    private var mMouth: Int = 0
+    private var mDay: Int = 0
 
     private lateinit var mAdapter: TodayAdapter
 
@@ -92,6 +94,7 @@ class TodayFragment : BaseFragment() {
                 mCalendarView.curMonth.toString(),
                 mCalendarView.curYear.toString()
             )
+            loadData()
         }
 
         mTextCurrentDay.setOnClickListener {
@@ -101,6 +104,7 @@ class TodayFragment : BaseFragment() {
                 mCalendarView.curMonth.toString(),
                 mCalendarView.curYear.toString()
             )
+            loadData()
         }
         setTitle(mCalendarView.curDay.toString(), mCalendarView.curMonth.toString(), mCalendarView.curYear.toString())
 
@@ -111,6 +115,7 @@ class TodayFragment : BaseFragment() {
                 if (isClick) {
                     setTitle(calendar?.day.toString(), calendar?.month.toString(), mCalendarView.curYear.toString())
                     mActivity.switchGroup(true)
+                    loadData()
                 }
             }
 
@@ -158,9 +163,9 @@ class TodayFragment : BaseFragment() {
     override fun loadData() {
 
         Observable
-            .just(mCalendarView.curYear.toString() + "," + mCalendarView.curMonth.toString() + "," + mCalendarView.curDay.toString())
+            .just("")
             .observeOn(Schedulers.newThread())
-            .map { t -> DaoManager.getInstance().all }
+            .map { t -> DaoManager.getInstance().getArgsRecord(mYear, mMouth, mDay) }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { t ->
                 mList.clear()
@@ -174,6 +179,8 @@ class TodayFragment : BaseFragment() {
 //        mTextYear.text = year
         mSelectTime.text = "$year-$month"
         mYear = year.toInt()
+        mMouth = month.toInt()
+        mDay = day.toInt()
 //        mTextMonthDay.text = month + "月" + day + "日"
 //        mTextLunar.text = day
         mTextCurrentDay.text = mCalendarView.curDay.toString()

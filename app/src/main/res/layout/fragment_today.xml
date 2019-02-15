@@ -18,6 +18,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="16dp"
                 android:padding="8dp"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
@@ -112,6 +113,7 @@
             android:id="@+id/mSelectLayout"
             android:orientation="horizontal"
             android:gravity="center"
+            android:background="#fff"
             android:layout_width="match_parent"
             android:layout_height="50dp">
 
@@ -125,8 +127,8 @@
                 android:id="@+id/mSelectTime"
                 android:gravity="center"
                 android:textSize="40px"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
@@ -163,7 +165,7 @@
                 app:selected_text_color="#111"
                 app:selected_theme_color="#333"
                 app:week_background="#fff"
-                app:week_text_color="#111"
+                app:week_bar_view="com.skwen.remind.custom.SimpleWeekBar"
                 app:year_view_day_text_color="#333333"
                 app:year_view_day_text_size="7sp"
                 app:year_view_month_text_color="#ff0000"
@@ -178,6 +180,7 @@
                 android:id="@+id/mExpandLayout"
                 android:gravity="center_vertical"
                 android:orientation="vertical"
+                android:background="#fff"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -185,20 +188,39 @@
                     android:id="@+id/mExpandCalendar"
                     android:src="@drawable/ic_today_expand_more"
                     android:layout_gravity="center_horizontal"
+                    android:padding="4dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
+            <View
+                    android:background="@color/today_list_item_line_color"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+
             <FrameLayout
+                    android:background="@color/today_back_color"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                <android.support.v7.widget.RecyclerView
-                        android:id="@+id/mRecyclerView"
-                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                <LinearLayout
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="#fff"
-                        />
+                        android:layout_height="match_parent">
+
+                    <View
+                            android:layout_marginTop="10dp"
+                            android:background="@color/today_list_item_line_color"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"/>
+
+                    <android.support.v7.widget.RecyclerView
+                            android:id="@+id/mRecyclerView"
+                            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            />
+
+                </LinearLayout>
 
                 <ViewStub
                         android:id="@+id/emptyLayout"

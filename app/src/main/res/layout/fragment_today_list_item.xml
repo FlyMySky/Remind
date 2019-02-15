@@ -2,15 +2,9 @@
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
+        android:background="@color/background_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-    <View
-            android:layout_marginLeft="@dimen/fab_margin_left"
-            android:layout_marginRight="@dimen/fab_margin_left"
-            android:background="@color/colorAccent"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"/>
 
     <LinearLayout
             android:orientation="horizontal"
@@ -23,6 +17,8 @@
                 android:id="@+id/itemLevel"
                 android:src="@drawable/ic_add_level_unselected"
                 android:padding="4dp"
+                android:layout_marginRight="@dimen/fab_margin_left"
+                android:layout_marginLeft="@dimen/fab_margin_left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
@@ -36,10 +32,17 @@
         <TextView
                 android:id="@+id/itemRemindContent"
                 android:padding="4dp"
+                android:layout_marginRight="@dimen/fab_margin_left"
+                android:layout_marginLeft="@dimen/fab_margin_left"
                 android:gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
     </LinearLayout>
+
+    <View
+            android:background="@color/today_list_item_line_color"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
 
 </LinearLayout>

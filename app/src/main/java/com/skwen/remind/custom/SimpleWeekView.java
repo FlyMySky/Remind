@@ -66,13 +66,16 @@ public class SimpleWeekView extends WeekView {
                             calendar.isCurrentMonth() ? mSchemeTextPaint : mSchemeTextPaint);
 
         } else {
-            if (calendar.isWeekend()) {
-                canvas.drawText(calendar.isCurrentDay() ? "今" : String.valueOf(calendar.getDay()), cx, baselineY, mCurDayTextPaint);
-            } else {
-                canvas.drawText(calendar.isCurrentDay() ? "今" : String.valueOf(calendar.getDay()), cx, baselineY,
-                        calendar.isCurrentDay() ? mCurDayTextPaint :
-                                calendar.isCurrentMonth() ? mCurMonthTextPaint : mCurMonthTextPaint);
-            }
+            mCurDayTextPaint.setFakeBoldText(false);
+            mCurMonthTextPaint.setFakeBoldText(false);
+            mOtherMonthTextPaint.setFakeBoldText(false);
+//            if (calendar.isWeekend()) {
+//                canvas.drawText(calendar.isCurrentDay() ? "今" : String.valueOf(calendar.getDay()), cx, baselineY, mCurDayTextPaint);
+//            } else {
+            canvas.drawText(calendar.isCurrentDay() ? "今" : String.valueOf(calendar.getDay()), cx, baselineY,
+                    calendar.isCurrentDay() ? mCurDayTextPaint :
+                            calendar.isCurrentMonth() ? mCurMonthTextPaint : mCurMonthTextPaint);
+//            }
         }
     }
 }
