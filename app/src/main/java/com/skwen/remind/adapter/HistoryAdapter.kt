@@ -20,7 +20,7 @@ class HistoryAdapter(private var list: MutableList<Record>) : RecyclerView.Adapt
 
         return HistoryHolder(
             LayoutInflater.from(viewGroup.context).inflate(
-                R.layout.fragment_today_list_item,
+                R.layout.fragment_history_list_item,
                 viewGroup,
                 false
             )
@@ -33,10 +33,10 @@ class HistoryAdapter(private var list: MutableList<Record>) : RecyclerView.Adapt
 
     override fun onBindViewHolder(holder: HistoryHolder, position: Int) {
         val item = list[position]
-        when {
-            item.level == 0 -> holder.itemLevel.setImageResource(R.drawable.ic_add_level_unselected)
-            item.level == 1 -> holder.itemLevel.setImageResource(R.drawable.ic_add_level_middle_unselected)
-            item.level == 2 -> holder.itemLevel.setImageResource(R.drawable.ic_add_level_important_unselected)
+        if (item.isOver) {
+            holder.itemLevel.setImageResource(R.drawable.ic_history_list_item_done)
+        } else {
+            holder.itemLevel.setImageResource(R.drawable.ic_history_list_item_undone)
         }
         holder.itemRemindTime.text = TimeUtils.millis2String(item.remindDate, SimpleDateFormat("HH:mm"))
         holder.itemRemindContent.text = item.content

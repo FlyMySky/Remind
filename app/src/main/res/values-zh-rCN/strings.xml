@@ -40,5 +40,12 @@
     <string name="add_week_sunday">周日</string>
     <string name="add_week_not_repeat">不重复</string>
     <string name="history_title">历史记录</string>
+    <string name="history_right">选择</string>
+    <string name="mine_title">我的</string>
+    <string name="mine_register_login_text">登录/注册</string>
+    <string name="mine_about_us_text">关于我们</string>
+    <string name="mine_feedback_text">意见反馈</string>
+    <string name="mine_evaluation_encourage_text">评价鼓励</string>
+    <string name="mine_recommend_text">推荐给你的朋友</string>
 
 </resources>

@@ -21,5 +21,12 @@
     <string name="add_week_sunday">Sunday</string>
     <string name="add_week_not_repeat">Not Repeat</string>
     <string name="history_title">History</string>
+    <string name="history_right">Select</string>
+    <string name="mine_title">Mine</string>
+    <string name="mine_register_login_text">Login/Register</string>
+    <string name="mine_about_us_text">About Us</string>
+    <string name="mine_feedback_text">Feedback</string>
+    <string name="mine_evaluation_encourage_text">EvaluationOfEncourage</string>
+    <string name="mine_recommend_text">Recommend To Your Friends</string>
 
 </resources>

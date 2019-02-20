@@ -5,20 +5,40 @@
                                              android:layout_height="match_parent"
         >
 
-    <TextView
-            android:id="@+id/historyTitle"
-            android:text="@string/history_title"
-            android:textSize="@dimen/titleTextSize"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textColor="@color/normal_text_color"
+    <RelativeLayout
+            android:id="@+id/topLayout"
             android:layout_width="match_parent"
-            android:layout_height="48dp"/>
+            android:layout_height="48dp">
+
+        <TextView
+                android:id="@+id/historyTitle"
+                android:text="@string/history_title"
+                android:textSize="@dimen/titleTextSize"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_centerInParent="true"
+                android:textColor="@color/normal_text_color"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
+
+        <TextView
+                android:id="@+id/historyRight"
+                android:text="@string/history_right"
+                android:textSize="@dimen/titleTextSize"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/fab_margin_left"
+                android:textColor="@color/normal_text_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
 
 
     <RadioGroup
             android:id="@+id/mRadioGroup"
-            app:layout_constraintTop_toBottomOf="@id/historyTitle"
+            app:layout_constraintTop_toBottomOf="@id/topLayout"
             android:orientation="horizontal"
             android:gravity="center"
             android:layout_width="match_parent"

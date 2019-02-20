@@ -52,4 +52,5 @@ dependencies {
     implementation Depends.rxandroid
     implementation Depends.timePicker
     implementation Depends.swipeRecyclerView
+    implementation Depends.circleimageview
 }
