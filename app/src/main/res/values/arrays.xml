@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="mine_setting_top_menu">
+        <item>主题和字体</item>
+        <item>通知方式</item>
+        <item>个性偏好</item>
+    </string-array>
+
+    <string-array name="mine_setting_bottom_menu">
+        <item>教程</item>
+        <item>评论</item>
+        <item>推荐给朋友</item>
+        <item>意见反馈</item>
+        <item>软件版本</item>
+    </string-array>
+
+</resources>

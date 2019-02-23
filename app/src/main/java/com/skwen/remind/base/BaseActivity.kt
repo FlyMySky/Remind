@@ -14,11 +14,17 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutRes())
+        initViews()
         loadData()
     }
 
     @LayoutRes
     abstract fun getLayoutRes(): Int
+
+
+    open fun initViews(){
+
+    }
 
     abstract fun loadData()
 }

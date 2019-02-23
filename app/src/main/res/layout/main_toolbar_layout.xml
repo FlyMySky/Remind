@@ -14,11 +14,14 @@
     <LinearLayout
             android:layout_width="wrap_content"
             android:orientation="vertical"
+            android:gravity="center"
+            android:layout_centerInParent="true"
             android:layout_height="match_parent">
 
         <TextView
                 android:id="@+id/titleBar"
                 android:gravity="center"
+                android:textStyle="bold"
                 android:textSize="@dimen/titleTextSize"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -27,6 +30,7 @@
                 android:id="@+id/subTitleBar"
                 android:gravity="center"
                 android:textSize="@dimen/subTitleTextSize"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
     </LinearLayout>
